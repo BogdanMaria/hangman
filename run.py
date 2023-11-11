@@ -40,6 +40,12 @@ def display_tried_letters(guessed_letters):
     else:
         print("No letters tried yet.")
 
+def display_attempts(attempts):
+    """
+    Display the number of attempts left"
+    """
+    print(f"Attempts left: {attempts}")
+
 def play_hangman():
     """
     Set up the game with allowed number of incorrect guesses.
@@ -58,6 +64,7 @@ def play_hangman():
     while attempts > 0:
         print(display_word(word_to_guess, guessed_letters))
         display_tried_letters(guessed_letters)
+        display_attempts(attempts)
         guess = get_guess(guessed_letters)
 
         guessed_letters.append(guess)
