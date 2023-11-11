@@ -46,6 +46,12 @@ def display_attempts(attempts):
     """
     print(f"Attempts left: {attempts}")
 
+def play_again():
+    """
+    Ask the user if he wants to play again
+    """
+    return input("Do you want to play again? (yes/no): ").lower == "yes"
+
 def play_hangman():
     """
     Set up the game with allowed number of incorrect guesses.
@@ -53,34 +59,39 @@ def play_hangman():
     Check if the guess is right or wrong and let the user know.
     Check if the player has guessed all the letters or if the attempts have been reached.
     """
-    player_name = input("Enter your name: \n")
-    print(f"Welcome to Hangman, {player_name}!")
+    while True:
+        player_name = input("Enter your name: \n")
+        print(f"Welcome to Hangman, {player_name}!")
 
-    word_to_guess = choose_word()
-    guessed_letters = []
-    attempts = 6
+        word_to_guess = choose_word()
+        guessed_letters = []
+        attempts = 6
 
 
-    while attempts > 0:
-        print(display_word(word_to_guess, guessed_letters))
-        display_tried_letters(guessed_letters)
-        display_attempts(attempts)
-        guess = get_guess(guessed_letters)
+        while attempts > 0:
+            print(display_word(word_to_guess, guessed_letters))
+            display_tried_letters(guessed_letters)
+            display_attempts(attempts)
+            guess = get_guess(guessed_letters)
 
-        guessed_letters.append(guess)
+            guessed_letters.append(guess)
 
-        if guess in word_to_guess:
-            print("Good guess!")
-        else:
-            print("Incorrect guess!")
-            attempts -= 1
-        
-        if all(letter in guessed_letters for letter in word_to_guess):
-            print(f"Congratulations, {player_name}! You guessed the word:", word_to_guess)
+            if guess in word_to_guess:
+                print("Good guess!")
+            else:
+                print("Incorrect guess!")
+                attempts -= 1
+            
+            if all(letter in guessed_letters for letter in word_to_guess):
+                print(f"Congratulations, {player_name}! You guessed the word:", word_to_guess)
+                break
+
+        if attempts == 0:
+            print(f"Sorry,{player_name}, you ran out of attempts. The word was:", word_to_guess)
+
+        if not play_again():
+            print("Thank you for playing Hangman! Goodbye.")
             break
-
-    if attempts == 0:
-        print(f"Sorry,{player_name}, you ran out of attempts. The word was:", word_to_guess)
 
 if __name__ == "__main__":
     play_hangman()
