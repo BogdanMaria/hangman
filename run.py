@@ -7,11 +7,22 @@ def choose_word() :
     words = ["programming", "function", "keyboard", "python", "hangman"]
     return random.choice(words)
 
-def get_guess():
+def get_guess(guessed_letters):
     """
-    Ask for a letter input from the user and make it lower case
+    Ask for a letter input from the user and make it lower case.
+    Check that the letter has not been introduced yet.
+    Check that is a letter.
     """
-    return input("Enter a letter: ").lower()
+    while True:
+
+        guess = input("Enter a letter: \n").lower()
+        if guess.isalpha() and len(guess) == 1:
+            if guess in guessed_letters:
+                print("You have already tried that letter. Try again.")
+            else:
+                return guess
+        else:
+            print("invalid input. Please enter a single letter.")       
 
 def display_word(word, guessed_letters):
     """
@@ -38,22 +49,21 @@ def play_hangman():
     """
     player_name = input("Enter your name: \n")
     print(f"Welcome to Hangman, {player_name}!")
+
     word_to_guess = choose_word()
     guessed_letters = []
     attempts = 6
 
-    print("Welcome to Hangman!")
 
     while attempts > 0:
         print(display_word(word_to_guess, guessed_letters))
         display_tried_letters(guessed_letters)
-        guess = get_guess()
+        guess = get_guess(guessed_letters)
 
         guessed_letters.append(guess)
 
         if guess in word_to_guess:
             print("Good guess!")
-            guessed_letters.append(guess)
         else:
             print("Incorrect guess!")
             attempts -= 1
