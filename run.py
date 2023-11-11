@@ -58,6 +58,7 @@ def play_hangman():
     Ask the player for name input.
     Check if the guess is right or wrong and let the user know.
     Check if the player has guessed all the letters or if the attempts have been reached.
+    Ask the player if he wants to play again.
     """
     while True:
         player_name = input("Enter your name: \n")
