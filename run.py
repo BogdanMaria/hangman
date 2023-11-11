@@ -13,6 +13,13 @@ def get_guess():
     """
     return input("Enter a letter: ").lower()
 
+def display_word(word, guessed_letters):
+    """
+    Display the current state of the word, with underscores for unguessed letters
+    and the guessed letters
+    """
+    return ' '.join(letter if letter in guessed_letters else '_' for letter in word)
+
 def play_hangman():
     """
     Set up the game with allowed number of incorrect guesses.
@@ -26,6 +33,7 @@ def play_hangman():
     print("Welcome to Hangman!")
 
     while attempts > 0:
+        print(display_word(word_to_guess, guessed_letters))
         guess = get_guess()
 
         if guess in word_to_guess:
