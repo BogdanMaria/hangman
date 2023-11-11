@@ -20,6 +20,15 @@ def display_word(word, guessed_letters):
     """
     return ' '.join(letter if letter in guessed_letters else '_' for letter in word)
 
+def display_tried_letters(guessed_letters):
+    """
+    Display the letters that have been tried
+    """
+    if guessed_letters:
+        print("Tried letters:", ','.join(guessed_letters))
+    else:
+        print("No letters tried yet.")
+
 def play_hangman():
     """
     Set up the game with allowed number of incorrect guesses.
@@ -37,7 +46,10 @@ def play_hangman():
 
     while attempts > 0:
         print(display_word(word_to_guess, guessed_letters))
+        display_tried_letters(guessed_letters)
         guess = get_guess()
+
+        guessed_letters.append(guess)
 
         if guess in word_to_guess:
             print("Good guess!")
