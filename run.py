@@ -1,11 +1,13 @@
 import random
 
-def choose_word() :
+
+def choose_word():
     """
     Chooses a random word from a given list of words
     """
     words = ["programming", "function", "keyboard", "python", "hangman"]
     return random.choice(words)
+
 
 def get_guess(guessed_letters):
     """
@@ -22,14 +24,16 @@ def get_guess(guessed_letters):
             else:
                 return guess
         else:
-            print("invalid input. Please enter a single letter.")       
+            print("invalid input. Please enter a single letter.")
+
 
 def display_word(word, guessed_letters):
     """
-    Display the current state of the word, with underscores for unguessed letters
-    and the guessed letters
+    Display the current state of the word, with underscores for
+     unguessed letters and the guessed letters
     """
     return ' '.join(letter if letter in guessed_letters else '_' for letter in word)
+
 
 def display_tried_letters(guessed_letters):
     """
@@ -40,11 +44,13 @@ def display_tried_letters(guessed_letters):
     else:
         print("No letters tried yet.")
 
+
 def display_attempts(attempts):
     """
     Display the number of attempts left"
     """
     print(f"Attempts left: {attempts}")
+
 
 def play_again():
     """
@@ -52,12 +58,14 @@ def play_again():
     """
     return input("Do you want to play again? (yes/no): \n").lower() == "yes"
 
+
 def play_hangman():
     """
     Set up the game with allowed number of incorrect guesses.
     Ask the player for name input.
     Check if the guess is right or wrong and let the user know.
-    Check if the player has guessed all the letters or if the attempts have been reached.
+    Check if the player has guessed all the letters or
+    if the attempts have been reached.
     Ask the player if he wants to play again.
     """
     while True:
@@ -67,7 +75,6 @@ def play_hangman():
         word_to_guess = choose_word()
         guessed_letters = []
         attempts = 6
-
 
         while attempts > 0:
             print(display_word(word_to_guess, guessed_letters))
@@ -82,7 +89,6 @@ def play_hangman():
             else:
                 print("Incorrect guess!")
                 attempts -= 1
-            
             if all(letter in guessed_letters for letter in word_to_guess):
                 print(f"Congratulations, {player_name}! You guessed the word:", word_to_guess)
                 break
@@ -96,3 +102,4 @@ def play_hangman():
 
 if __name__ == "__main__":
     play_hangman()
+
