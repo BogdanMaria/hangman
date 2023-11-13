@@ -50,7 +50,7 @@ def play_again():
     """
     Ask the user if he wants to play again
     """
-    return input("Do you want to play again? (yes/no): ").lower == "yes"
+    return input("Do you want to play again? (yes/no): \n").lower() == "yes"
 
 def play_hangman():
     """
